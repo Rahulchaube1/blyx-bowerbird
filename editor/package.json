@@ -1,0 +1,57 @@
+{
+  "name": "blyx-bowerbird",
+  "displayName": "Blyx Bowerbird",
+  "description": "Decide whether a proposed numeric-core dependency upgrade fits a declared version range.",
+  "version": "0.1.0",
+  "publisher": "RahulChaube",
+  "license": "(MIT OR Apache-2.0)",
+  "icon": "logo.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "keywords": [
+    "blyx",
+    "bowerbird",
+    "framework"
+  ],
+  "homepage": "https://www.blyx-lang.space/packages/bowerbird",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rahulchaube1/blyx-bowerbird.git",
+    "directory": "editor"
+  },
+  "bugs": {
+    "url": "https://github.com/Rahulchaube1/blyx-bowerbird/issues"
+  },
+  "extensionDependencies": [
+    "RahulChaube.blyx-language"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "blyx",
+        "path": "./snippets/framework.json"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "bowerbird.start",
+        "title": "Get started with Bowerbird",
+        "description": "Decide whether a proposed numeric-core dependency upgrade fits a declared version range.",
+        "steps": [
+          {
+            "id": "run",
+            "title": "Run the Bowerbird example",
+            "description": "Create an empty .blyx file, insert blyx-bowerbird-demo and choose **Blyx: Run File**.\n[Open the documentation](https://www.blyx-lang.space/packages/bowerbird)",
+            "media": {
+              "markdown": "walkthrough.md"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

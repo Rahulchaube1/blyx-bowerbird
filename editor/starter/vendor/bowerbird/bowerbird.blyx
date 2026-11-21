@@ -1,0 +1,51 @@
+use semvercore;
+use versionband;
+
+fn bowerbird_finite(values: vector) -> bool {
+    let mut i = 0;
+    while i < len(values) {
+        let value = at(values, i);
+        if !(value - value == 0.0) {
+            return false;
+        }
+        i += 1;
+    }
+    true
+}
+
+fn bowerbird_counts(values: vector) -> bool {
+    let mut i = 0;
+    while i < len(values) {
+        let value = at(values, i);
+        if !(value >= 0.0 && value <= 9007199254740991.0 && value % 1.0 == 0.0) {
+            return false;
+        }
+        i += 1;
+    }
+    true
+}
+
+fn bowerbird_compute(installed: vector, candidate: vector, lower: vector, upper: vector) -> vector {
+    let diff = semvercore_compare(candidate, installed);
+    let allowed = versionband_contains(candidate, lower, upper);
+    if len(diff) == 0 || len(allowed) == 0 {
+        return [];
+    }
+    let mut ok = 0;
+    if at(diff, 0) >= 0.0 && at(allowed, 0) == 1.0 {
+        ok = 1;
+    }
+    [ok, at(diff, 0), at(diff, 1), at(allowed, 0)]
+}
+
+// Decide whether a proposed numeric-core dependency upgrade fits a declared version range.
+// Returns [allowed upgrade, candidate versus installed, major/minor/patch index changed, within range]. Equal versions are allowed. This release handles numeric cores and explicit bounds.
+pub fn bowerbird_upgrade(installed: vector, candidate: vector, lower: vector, upper: vector) -> vector {
+    if !bowerbird_counts(installed) { return []; }
+    if !bowerbird_counts(candidate) { return []; }
+    if !bowerbird_counts(lower) { return []; }
+    if !bowerbird_counts(upper) { return []; }
+    let result = bowerbird_compute(installed, candidate, lower, upper);
+    if !bowerbird_finite(result) { return []; }
+    result
+}
